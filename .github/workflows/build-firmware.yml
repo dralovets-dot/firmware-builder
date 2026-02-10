@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout private NeonMind repo
+      - name: Checkout NeonMind repo
         uses: actions/checkout@v4
         with:
           repository: CloWn27/NeonMind-Security-Suite
