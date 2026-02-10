@@ -8,11 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Clone NeonMind repo
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
-        run: |
-          git clone "https://${GH_PAT}@github.com/CloWn27/NeonMind-Security-Suite.git" source
+      - name: Checkout private NeonMind repo
+        uses: actions/checkout@v4
+        with:
+          repository: CloWn27/NeonMind-Security-Suite
+          token: ${{ secrets.GH_PAT }}
+          path: source
       
       - name: Setup Python
         uses: actions/setup-python@v5
