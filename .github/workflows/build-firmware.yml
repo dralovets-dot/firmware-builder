@@ -8,16 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout tools repo
-        uses: actions/checkout@v4
-      
-      - name: Clone NeonMind private repo
+      - name: Clone NeonMind repo
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git clone \
-            "https://${GH_PAT}@github.com/CloWn27/NeonMind-Security-Suite.git" \
-            source
+          git clone "https://${GH_PAT}@github.com/CloWn27/NeonMind-Security-Suite.git" source
       
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -38,4 +33,3 @@ jobs:
           name: firmware-binary
           path: source/.pio/build/**/*.bin
         if: always()
-        
