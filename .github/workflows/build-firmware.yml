@@ -1,0 +1,32 @@
+name: Build NeonMind Firmware
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone NeonMind repo
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: git clone --depth 1 https://${GH_PAT}@github.com/CloWn27/NeonMind-Security-Suite.git source
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install PlatformIO
+        run: pip install platformio
+      
+      - name: Build firmware
+        run: |
+          cd source
+          pio run
+      
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware-binary
+          path: source/.pio/build/**/*.bin
